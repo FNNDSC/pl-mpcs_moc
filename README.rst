@@ -28,7 +28,7 @@ Synopsis
 
 .. code:: bash
 
-    python mpcs.py                                                  \
+    python mpcs_moc.py                                                  \
         [--random] [--seed <seed>]                                  \
         [-p <f_posRange>] [--posRange <f_posRange>]                 \
         [-n <f_negRange>] [--negRange <f_negRange>]                 \
