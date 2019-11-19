@@ -57,7 +57,7 @@ Gstr_synopsis = """
         * Bare bones execution
 
             mkdir in out && chmod 777 out
-            python mpcs_moc.py  in    out
+            python mpcs_moc.py in out --man
 
     DESCRIPTION
 
@@ -102,7 +102,8 @@ Gstr_synopsis = """
 
     Create a z-file with values between -3.0 and +3.0
 
-        mpcs_moc.py     --random --seed 1                   \\
+        mkdir in out
+        mpcs_moc.py --random --seed 1                   \\
                     --posRange 3.0 --negRange -3.0      \\
                     in out
 
@@ -121,7 +122,7 @@ class Mpcs_moc(ChrisApp):
     TYPE                    = 'ds'
     DESCRIPTION             = 'This app simulates an MPC compute call.'
     DOCUMENTATION           = 'https://github.com/FNNDSC/pl-mpcs'
-    VERSION                 = '1.0.10'
+    VERSION                 = '1.2.0'
     ICON                    = '' # url of an icon image
     LICENSE                 = 'Opensource (MIT)'
     MAX_NUMBER_OF_WORKERS   = 1  # Override with integer value
@@ -146,21 +147,11 @@ class Mpcs_moc(ChrisApp):
     # output directory.
     OUTPUT_META_DICT = {}
  
-    def manPage_show(self):
+    def show_man_page(self):
         """
         Print some quick help.
         """
         print(Gstr_synopsis)
-
-    def metaData_show(self):
-        """
-        Print the plugin meta data
-        """
-        l_metaData  = dir(self)
-        l_classVar  = [x for x in l_metaData if x.isupper() ]
-        for str_var in l_classVar:
-            str_val = getattr(self, str_var)
-            print("%20s: %s" % (str_var, str_val))
 
     def a2009sStructList_define(self):
         """
@@ -356,18 +347,6 @@ class Mpcs_moc(ChrisApp):
             'DKatlas':  copy.deepcopy(self.d_core),
             'default':  copy.deepcopy(self.d_core)
         }
-
-        if options.b_man:
-            self.manPage_show()
-            sys.exit(0)
-
-        if options.b_meta:
-            self.metaData_show()
-            sys.exit(0)
-
-        if options.b_version:
-            print('Plugin Version: %s' % Mpcs_moc.VERSION)
-            sys.exit(0)
 
         print(Gstr_title)
         print('Version: %s' % Mpcs_moc.VERSION)
